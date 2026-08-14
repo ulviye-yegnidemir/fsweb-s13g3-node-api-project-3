@@ -44,7 +44,12 @@ function update(id, changes) {
 }
 
 function remove(id) {
+  return getById(id).then(user => {
   return db('users')
     .where('id', id)
-    .del();
+    .del()
+    .then(() => {
+      return user;
+    });
+  });
 }
